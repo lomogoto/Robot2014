@@ -12,10 +12,9 @@ public class Robot extends SimpleRobot {
     public Stick lStick=new Stick(C.LEFTSTICK);
     public Stick rStick=new Stick(C.RIGHTSTICK);
     public Motor shooter=new Motor(C.SHOOTERSCREWPORT);
-    public Switch shooterfront=new Switch(C.SHOOTERFRONTSWITCH);
-    public Switch shooterback=new Switch(C.SHOOTERBACKSWITCH);
+    public Switch shooterFront=new Switch(C.SHOOTERFRONTSWITCH);
+    public Switch shooterBack=new Switch(C.SHOOTERBACKSWITCH);
     public Switch armStopSwitch=new Switch(C.ARMSTOPSWITCH);
-    //public Switch testSwitch=new Switch(4);
     public boolean loadingBackward;
     public boolean loadingForward;
     
@@ -50,7 +49,8 @@ public class Robot extends SimpleRobot {
             message.debug(0,"Left Stick",""+lStick.getY());
             message.debug(1,"Right Stick",""+rStick.getY());
             message.debug(2,"Ready to shoot",""+(!loadingBackward&&!loadingForward));
-            //message.debug(3, "Test Switch",""+testSwitch.get());
+            message.debug(3, "Front Switch",""+shooterFront.get());
+            message.debug(3, "Back Switch",""+shooterBack.get());
             
             //drive
             drive.setDirect(lStick.getY(), rStick.getY());
@@ -65,11 +65,11 @@ public class Robot extends SimpleRobot {
                     roller.setSpeed(1);
                 }
             } else if (rStick.getState(C.ARMDOWNBTN)  && !armStopSwitch.get()){
-                //if (!armStopSwitch.get()){
+                if (!armStopSwitch.get()){
                     arm.setSpeed(-1);
-                /*} else {
+                } else {
                     arm.setSpeed(0);
-                }*/
+                }
                 if (!(lStick.getState(C.ROLLERUPBTN) || lStick.getState(C.ROLLERDOWNBTN))){
                     roller.setSpeed(-1);
                 }
@@ -94,7 +94,7 @@ public class Robot extends SimpleRobot {
             
             //apl other way of dealing with ball shooter
             //if both triggers are pushed.. shoot
-           // int LOAD = -1;
+            //int LOAD = -1;
             //int READY = 0;
             //int 
                
@@ -111,7 +111,7 @@ public class Robot extends SimpleRobot {
                 shooter.setSpeed(-1);
                 
                 //reverse once trigger back all the way
-                if (shooterfront.get()){
+                if (shooterFront.get()){
                     shooter.setSpeed(1);
                     loadingForward=false;
                     loadingBackward=true;
@@ -120,7 +120,7 @@ public class Robot extends SimpleRobot {
             //stop once in shooting position
             } else if (loadingBackward){
                 shooter.setSpeed(1);
-                if (shooterback.get()){
+                if (shooterBack.get()){
                     loadingBackward=false;
                 }
             } else {
