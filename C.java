@@ -12,7 +12,6 @@ public class C {
     public static final int LEFTSTICK=1;
     public static final int RIGHTSTICK=2;
     public static final int SHOOTERBTN=1;
-    public static final int SHOOTERSTOPBTN=4;
     public static final int ARM=5;
     public static final int ROLLER=3;
     public static final int SHOOTERFRONTSWITCH=1;

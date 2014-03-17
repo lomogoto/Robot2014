@@ -128,7 +128,7 @@ public class Robot extends SimpleRobot {
             }
             
             //let button 4 stop slide
-            if (rStick.getState(C.SHOOTERSTOPBTN)){
+            if (rStick.getState(4)||rStick.getState(5)||lStick.getState(4)||lStick.getState(5)){
                 loadingForward=false;
                 loadingBackward=false;
                 shooter.setSpeed(0);
