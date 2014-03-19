@@ -50,8 +50,8 @@ public class Robot extends SimpleRobot {
             message.debug(0,"Left Stick",""+lStick.getY());
             message.debug(1,"Right Stick",""+rStick.getY());
             message.debug(2,"Ready to shoot",""+(!loadingBackward&&!loadingForward));
-            message.debug(3, "Front Switch",""+shooterFront.get());
-            message.debug(4, "Back Switch",""+shooterMid.get());
+            message.debug(3,"Front Switch",""+shooterFront.get());
+            message.debug(4,"Back Switch",""+shooterMid.get());
             
             //drive
             drive.setDirect(lStick.getY(), rStick.getY());
@@ -100,8 +100,12 @@ public class Robot extends SimpleRobot {
           
             
             //shoot on trigger
-            if (rStick.getState(C.SHOOTERBTN) && lStick.getState(C.SHOOTERBTN) && !shooterStop.get()){
-                shooter.setSpeed(1);
+            if (rStick.getState(C.SHOOTERBTN) && lStick.getState(C.SHOOTERBTN)){
+                if (!shooterStop.get()){   
+                    shooter.setSpeed(1);
+                } else {
+                    shooter.setSpeed(0);
+                }
                 loadingForward=true;
                 
             //go back once shot
@@ -117,7 +121,11 @@ public class Robot extends SimpleRobot {
                 
             //stop once in shooting position
             } else if (loadingBackward){
-                shooter.setSpeed(1);
+                if (!shooterStop.get()){   
+                    shooter.setSpeed(1);
+                } else {
+                    shooter.setSpeed(0);
+                }
                 if (shooterMid.get()){
                     loadingBackward=false;
                 }
