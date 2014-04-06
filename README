@@ -1,0 +1,8 @@
+#!/bin/bash
+echo "
+
+Team Brave Bots (4682) FRC Robot Code 2014
+
+Program for our robot to drive, collect, and shoot a large yoga ball
+
+"
